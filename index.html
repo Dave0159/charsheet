@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="id"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Azio Dottore</title>
+<style>
+:root{--bg:#0b1a22;--p:#131a20;--p2:#1a232b;--ln:#4a5560;--tx:#e8ecef;--mu:#8f9aa3;--g:#4ad07a;--r:#e0504a;--a:#e8b04a}
+*{box-sizing:border-box}
+body{margin:0;font:14px/1.45 "Segoe UI",system-ui,sans-serif;color:var(--tx);min-height:100vh;
+background:linear-gradient(180deg,#1f6a80 0,#10303c 40%,#0b1a22 100%) fixed}
+button{font:inherit;color:inherit;cursor:pointer}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--a);outline-offset:1px}
+#wrap{display:flex;min-height:100vh}#main{flex:1;min-width:0;padding:10px 14px 40px}
+header{display:flex;align-items:center;gap:12px;background:#0f1519e6;border:1px solid #2c363f;padding:8px 12px;border-radius:4px;flex-wrap:wrap}
+header h1{margin:0;font-size:22px}header small{color:var(--mu);display:block}
+.sp{flex:1}.btn{background:#1c252d;border:1px solid var(--ln);padding:6px 12px;border-radius:3px;font-size:12px}
+.btn:hover{background:#27323c}.btn.g{border-color:var(--g)}.btn.r{border-color:var(--r)}
+.box{background:#10171dee;border:1px solid var(--ln);border-radius:10px;padding:8px}
+.top{display:flex;gap:8px;margin:12px 0;flex-wrap:wrap;align-items:stretch}
+.ab{width:84px;text-align:center;padding:6px 4px}.ab b{font-size:11px;display:block;color:var(--mu)}
+.ab .m{font-size:24px;font-weight:700;border:1px solid var(--ln);border-radius:6px;margin:4px 0;background:#0a0f13}
+.ab .s{display:inline-block;border:1px solid var(--ln);border-radius:12px;padding:0 10px;font-size:12px}
+.stat{text-align:center;padding:6px 14px;min-width:90px}.stat b{display:block;font-size:11px;color:var(--mu)}.stat span{font-size:24px;font-weight:700}
+.hp{min-width:300px;flex:1}.hpn{display:flex;gap:18px;align-items:center;justify-content:center}
+.hpn div{text-align:center;font-size:11px;color:var(--mu)}.hpn span{display:block;font-size:26px;color:var(--tx);font-weight:700}
+.hpc{display:flex;gap:6px;margin-top:6px;justify-content:center}
+.hpc input{width:64px;background:#0a0f13;border:1px solid var(--ln);color:var(--tx);padding:4px;border-radius:3px;text-align:center}
+.bar{height:6px;background:#2a343c;border-radius:3px;margin:6px 0;overflow:hidden}.bar i{display:block;height:100%;background:var(--g)}
+.cols{display:grid;grid-template-columns:230px 250px 1fr;gap:12px}
+@media(max-width:1000px){.cols{grid-template-columns:1fr 1fr}.cols>.c3{grid-column:1/3}}
+@media(max-width:640px){.cols{grid-template-columns:1fr}.cols>.c3{grid-column:1}}
+h3{margin:0 0 6px;font-size:12px;color:var(--mu);text-align:center}
+.row{display:flex;align-items:center;gap:8px;padding:5px 6px;border-bottom:1px solid #263039;cursor:pointer;border-radius:3px}
+.row:hover{background:#1d2830}.row.sel{background:#243542}
+.row .n{flex:1}.row .v{min-width:42px;text-align:center;border:1px solid var(--ln);border-radius:4px;padding:1px 6px;background:#0a0f13;font-weight:600}
+.row small{color:var(--mu);font-size:11px}
+.dot{width:14px;height:14px;border-radius:50%;border:1.5px solid var(--mu);background:none;padding:0;flex:none;position:relative}
+.dot.l1{background:var(--tx);border-color:var(--tx)}
+.dot.l2{background:var(--tx);border-color:var(--tx);box-shadow:0 0 0 2px #10171d,0 0 0 3.5px var(--a)}
+.tabs{display:flex;gap:14px;border-bottom:1px solid var(--ln);margin-bottom:8px;overflow-x:auto}
+.tabs button{background:none;border:0;padding:6px 2px;color:var(--mu);font-weight:600;white-space:nowrap}
+.tabs .on{color:var(--tx);border-bottom:2px solid var(--a)}
+.fl{display:flex;gap:4px;margin-bottom:8px;flex-wrap:wrap}.fl button{background:#0a0f13;border:1px solid var(--ln);font-size:11px;padding:2px 8px;border-radius:2px}
+.fl .on{background:var(--tx);color:#000}
+.empty{color:var(--mu);padding:14px;text-align:center}
+input.t,textarea.t{width:100%;background:#0a0f13;border:1px solid var(--ln);color:var(--tx);padding:6px;border-radius:3px;font:inherit;margin-bottom:4px}
+.ent{border:1px solid #2c363f;border-radius:6px;padding:8px;margin-bottom:8px;background:#0e1419}
+.ent h4{margin:0 0 4px;display:flex;justify-content:space-between}.ent .tx{white-space:pre-wrap;min-height:20px;outline:0}
+.x{background:none;border:0;color:var(--mu)}.x:hover{color:var(--r)}
+.q{display:flex;gap:2px;align-items:center}.q button{width:22px;height:22px;background:#1c252d;border:1px solid var(--ln);border-radius:3px;padding:0}
+#side{width:340px;background:#0f1519f2;border-left:1px solid var(--ln);padding:16px;position:sticky;top:0;height:100vh;overflow:auto;flex:none}
+#side h2{margin:0;font-size:18px}#side em{color:var(--mu)}#side hr{border:0;border-top:1px solid #2c363f;margin:10px 0}
+#side .kv{margin:2px 0}#side .kv b{color:var(--mu);font-weight:500;margin-right:4px}
+@media(max-width:1000px){#side{position:fixed;right:0;top:0;z-index:9;box-shadow:-8px 0 30px #000a;max-width:90vw}}
+.empty2{color:var(--mu);margin-top:40vh;text-align:center}
+.chk{display:inline-block;width:20px;height:20px;border-radius:50%;border:2px solid var(--a);background:none;vertical-align:middle;margin-right:4px;padding:0}.chk.on{background:var(--a)}
+
+.xp{min-width:200px}.xp .bar{margin:2px 0}.xc{display:flex;gap:4px}.xc input{width:70px;background:#0a0f13;border:1px solid var(--ln);color:var(--tx);padding:4px;border-radius:3px;text-align:center}
+.sec{margin:14px 0 6px;color:var(--mu);font-size:12px;border-bottom:1px solid #2c363f;padding-bottom:3px;font-weight:600}
+table.at{width:100%;border-collapse:collapse;font-size:13px}.at th{font-size:10px;color:var(--mu);text-align:left;padding:3px 6px}
+.at td{padding:6px;border-bottom:1px solid #263039;vertical-align:middle}.at tr[data-act]:hover,.ch2:hover{background:#1d2830;cursor:pointer}.at tr.sel{background:#243542}
+.at small,.mast,.ft small{color:var(--mu)}.at .v{display:inline-block;min-width:42px;text-align:center;border:1px solid var(--ln);border-radius:4px;padding:1px 6px;background:#0a0f13;font-weight:600}
+.aic{margin:10px 0;padding:6px 10px;border:1px solid #2c363f;border-radius:4px}.aic b{display:block;margin-bottom:4px}
+.ch{cursor:pointer;border-bottom:1px dotted var(--mu)}.ch:hover{color:var(--a)}.mast p{margin:8px 0;color:var(--tx);font-size:13px}
+.invh{display:flex;align-items:center;gap:10px;margin-bottom:8px}.addrow{display:flex;gap:4px;flex-wrap:wrap}.addrow .t{width:auto;flex:1;min-width:90px}
+.gh{margin:8px 0 4px;color:var(--mu)}.ft{margin:8px 0 12px}.ft p{margin:4px 0;font-size:13px}.chl{border-left:2px solid var(--ln);padding-left:10px;margin:6px 0;font-size:13px}
+.ed{min-height:20px;outline:0;border-radius:3px;padding:1px 3px;white-space:pre-wrap}.ed:focus{background:#0a0f13}.ed:empty::before{content:attr(data-ph);color:var(--mu)}
+.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}.grid b{display:block;font-size:11px}@media(max-width:640px){.grid{grid-template-columns:repeat(2,1fr)}}
+.ent2{display:flex;gap:6px;align-items:flex-start;margin:4px 0}.ent2 .ed{flex:1}.add{background:none;border:0;color:var(--tx);padding:4px 0}.add:hover{color:var(--a)}
+select.t{width:auto}
+</style></head><body>
+<div id="wrap"><div id="main"></div><aside id="side"></aside></div>
+<script>
+const KEY="azio-sheet-v1",$=s=>document.querySelector(s);
+const esc=t=>String(t).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const AB={STR:18,DEX:19,CON:19,INT:13,WIS:13,CHA:15},PROF_SAVE=["DEX","INT"];let PB=2;
+const XPT=[0,300,900,2700,6500,14000,23000,34000,48000,64000,85000,100000,120000,140000,165000,195000,225000,265000,305000,355000];
+const mod=v=>Math.floor((v-10)/2),sg=n=>(n>=0?"+":"")+n;
+const SK=[["Acrobatics","DEX"],["Animal Handling","WIS"],["Arcana","INT"],["Athletics","STR"],["Deception","CHA"],["History","INT"],["Insight","WIS"],["Intimidation","CHA"],["Investigation","INT"],["Medicine","WIS"],["Nature","INT"],["Perception","WIS"],["Performance","CHA"],["Persuasion","CHA"],["Religion","INT"],["Sleight of Hand","DEX"],["Stealth","DEX"],["Survival","WIS"]];
+const ATK=[
+{n:"Crossbow, Hand",t:"Ranged Weapon",r:"30 (120)",d:"1d6+4",nt:"Martial, Ammunition, Range, Light, Loading, Vex, Range (30/120)",desc:"Damage 1d6+4 piercing. Ranged 30/120 ft. Properties: Ammunition, Light, Loading, Vex (hit a creature, then Advantage on your next attack against it before the end of your next turn)."},
+{n:"Dagger",t:"Melee Weapon · Mastery",r:"20 (60)",d:"1d4+4",nt:"Simple, Finesse, Light, Thrown, Nick, Range (20/60)",desc:"Damage 1d4+4 piercing. Finesse, Light, Thrown 20/60 ft. Nick: the extra attack of the Light property can be made as part of the Attack action instead of as a Bonus Action, once per turn."},
+{n:"Rapier",t:"Melee Weapon · Mastery",r:"5 ft.",d:"1d8+4",nt:"Martial, Finesse, Vex",desc:"Damage 1d8+4 piercing. Finesse. Vex: if you hit a creature and deal damage, you have Advantage on your next attack roll against that creature before the end of your next turn."},
+{n:"Unarmed Strike",t:"Melee Attack",r:"5 ft.",d:"5",nt:"",desc:"Melee attack with your body. Damage 1 + STR modifier bludgeoning (1+4 = 5). Grapple: target makes a STR/DEX save (DC 8 + STR mod + Proficiency Bonus). Shove: STR/DEX save; push 5 ft. or knock Prone."}];
+const ACT=[["Attack","action","Make one attack with a weapon or an Unarmed Strike."],["Dash","action","Gain extra movement equal to your Speed for this turn."],["Disengage","action","Your movement does not provoke Opportunity Attacks for the rest of the turn."],["Dodge","action","Attacks against you have Disadvantage and you have Advantage on DEX saves until your next turn."],["Grapple","action","Unarmed Strike option. Target makes STR/DEX save or has the Grappled condition."],["Help","action","Give an ally Advantage on a check or attack."],["Hide","action","Make a DEX (Stealth) check to hide."],["Improvise","action","Do something not covered by another action."],["Influence","action","Make a CHA check (Deception, Intimidation, Performance, Persuasion) to sway a creature."],["Magic","action","Cast a spell or use a magic item or feature."],["Ready","action","Prepare an action triggered by a stated event, using your Reaction."],["Search","action","Make a Perception, Insight, Investigation, Medicine, or Survival check."],["Shove","action","Unarmed Strike option. Target makes STR/DEX save; push 5 ft. or knock Prone."],["Study","action","Make an Arcana, History, Investigation, Nature, or Religion check."],["Utilize","action","Use a nonmagical object."],["Two-Weapon Fighting","bonus","When you take the Attack action and attack with a Light weapon, you can make one extra attack with a different Light weapon as a Bonus Action (Nick lets Daggers do this as part of the Attack action). Do not add your ability modifier to the damage unless it is negative."],["Opportunity Attack","reaction","When a creature you can see leaves your reach, use your Reaction to make one melee attack against it."],["Interact with an Object","other","Interact with one object freely during your move or action (open a door, draw a weapon, etc.)."]].map(([n,tag,desc])=>({n,tag,desc}));
+const FT=()=>{const sd=Math.ceil(S.lvl/2);return[
+{c:"class",g:"Rogue Features",i:[
+{n:"Core Rogue Traits",s:"PHB-2024, pg. 129",d:"",ch:["Acrobatics","Athletics","Sleight of Hand","Deception"]},
+{n:"Expertise",s:"PHB-2024, pg. 129",d:"You gain Expertise in two of your skill proficiencies of your choice.",ch:["Stealth","Acrobatics"]},
+{n:"Sneak Attack",s:"PHB-2024, pg. 129",d:`Once per turn you can deal an extra ${sd}d6 damage to one creature you hit with an attack if you have Advantage on the roll and the attack uses a Finesse or a Ranged weapon. The extra damage's type is the same as the weapon's type.\nYou don't need Advantage on the attack if at least one of your allies is within 5 ft. of the target, the ally doesn't have the Incapacitated condition, and you don't have Disadvantage on the attack roll.`,ch:["Sneak Attack: Special"]},
+{n:"Thieves' Cant",s:"PHB-2024, pg. 129",d:"You know Thieves' Cant and one other language of your choice.",ch:["Deep Speech"]},
+{n:"Weapon Mastery",s:"PHB-2024, pg. 129",d:"You can use the mastery properties of two kinds of weapons of your choice with which you have proficiency. After each Long Rest you can change your choices.",ch:["Dagger (Nick)","Rapier (Vex)"]}]},
+{c:"species",g:"Human Traits",i:[
+{n:"Resourceful",s:"PHB-2024, pg. 186",d:"You gain Heroic Inspiration whenever you finish a Long Rest.",ch:[]},
+{n:"Versatile",s:"PHB-2024, pg. 186",d:"You gain an Origin feat of your choice.",ch:["Lucky"]}]},
+{c:"feat",g:"Feats",i:[
+{n:"Alert",s:"Criminal",d:"Initiative Proficiency: add your Proficiency Bonus to Initiative rolls.\nInitiative Swap: right after you roll Initiative, you can swap it with a willing ally in the same combat (neither can be Incapacitated).",ch:[]},
+{n:"Lucky",s:"Human · Versatile",d:"Luck Points equal to your Proficiency Bonus. Spend 1 for Advantage on a D20 Test, or to impose Disadvantage on an attack roll against you. Regained on Long Rest.",ch:[]}]}]};
+const I=(n,sub,w,q,c,nt,sec)=>({n,sub,w,q,c,nt,sec});
+const D={hp:12,max:12,tmp:0,lv:{},luck:2,insp:true,sneak:false,tab:"actions",lvl:1,xp:0,cp:100,gp:58,q:"",
+sub:{actions:"all",inv:"all",feat:"all",bg:"all",notes:"all"},
+lv0:{Acrobatics:2,Athletics:1,Deception:1,Insight:1,Intimidation:1,Investigation:1,"Sleight of Hand":1,Stealth:2},
+items:[I("Crossbow, Hand","Crossbow, Hand",3,1,75,"Martial, Ammunition, Range, Light, Loading, Vex, Range (30/120)","eq"),I("Dagger","Dagger · Mastery",1,1,2,"Simple, Finesse, Light, Thrown, Nick, Range (20/60)","eq"),I("Dagger","Dagger · Mastery",1,1,2,"Simple, Finesse, Light, Thrown, Nick, Range (20/60)","eq"),I("Grappling Hook","Gear · Adventuring Gear",4,1,2,"Utility, Exploration","eq"),I("Leather","Light Armor · Leather",10,1,10,"AC 11","eq"),I("Rapier","Rapier · Mastery",2,1,25,"Martial, Finesse, Vex","eq"),I("Thieves' Tools","Gear · Tool",1,1,25,"Utility, Exploration","eq"),
+I("Ball Bearings (Bag of 1,000)","Gear",2,1,1,"","pack"),I("Bell","Gear",0,1,1,"","pack"),I("Burglar's Pack","Gear · Pack",7,1,16,"","pack"),I("Crowbar","Gear",5,1,2,"","pack"),I("Hooded Lantern","Gear",2,1,5,"","pack"),I("Oil","Gear",1,7,0.1,"","pack"),I("Pouch","Gear",1,2,0.5,"","pack"),I("Rations (1 day)","Gear",2,5,0.5,"","pack"),I("Rope","Gear",5,1,1,"","pack"),I("Tinderbox","Gear",1,1,0.5,"","pack"),I("Traveler's Clothes","Gear",3,1,2,"","pack"),I("Waterskin","Gear",5,1,0.2,"","pack")].map((x,i)=>({...x,id:i,on:i<7&&i!=3&&i!=6})),
+f:{align:"Neutral",size:"Medium"},nt:{org:["Assassin Creed"],ally:[],enemy:[],back:[],other:[]},ent:{extra:[{t:"Eagle (Creature Companion)",x:"Small beast · AC 12 · HP 3/3"}]},nid:100};
+let S;try{S=Object.assign({},D,JSON.parse(localStorage.getItem(KEY)||"{}"))}catch(e){S={...D}}
+S.sub=Object.assign({},D.sub,S.sub);if(!Object.keys(S.lv).length)S.lv={...D.lv0};
+if(!Array.isArray(S.items)||!S.items[0]||S.items[0].w===undefined)S.items=D.items;
+let sel=null;
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
+const sk=([n,a])=>mod(AB[a])+PB*(S.lv[n]||0),save_=a=>mod(AB[a])+(PROF_SAVE.includes(a)?PB:0),pas=n=>10+sk(SK.find(s=>s[0]==n));
+const W=()=>S.items.reduce((s,i)=>s+i.w*i.q,0),gp=n=>+(+n).toFixed(2);
+function levelUp(){if(S.lvl>=20)return;S.lvl++;const g=5+mod(AB.CON);S.max+=g;S.hp+=g;S.xp=Math.max(S.xp,XPT[S.lvl-1])}
+function filt(k,L){return `<div class="fl">${L.map(([id,n])=>`<button class="${S.sub[k]==id?"on":""}" data-act="fl" data-k="${k}" data-id="${id}">${n}</button>`).join("")}</div>`}
+const sec=t=>`<div class="sec">${t}</div>`;
+const chips=tag=>`<div class="aic"><b>Actions in Combat</b><div>${ACT.filter(a=>a.tag==tag).map(a=>`<span class="ch" data-act="open" data-id="c-${a.n}">${a.n}</span>`).join(", ")}</div></div>`;
+const atbl=r=>`<table class="at"><tr><th>ATTACK<th>RANGE<th>HIT / DC<th>DAMAGE<th>NOTES</tr>${r}</table>`;
+function actions(){
+const f=S.sub.actions,sh=k=>f=="all"||f==k,sd=Math.ceil(S.lvl/2),hit=sg(4+PB);
+let h=filt("actions",[["all","ALL"],["attack","ATTACK"],["action","ACTION"],["bonus","BONUS ACTION"],["reaction","REACTION"],["other","OTHER"]]);
+const T=sec("ACTIONS · Attacks per Action: 1")+atbl(ATK.map(a=>`<tr class="${sel&&sel.id=="a-"+a.n?"sel":""}" data-act="open" data-id="a-${a.n}"><td>${a.n}<br><small>${a.t}</small><td>${a.r}<td><span class="v">${hit}</span><td><span class="v">${a.d}</span><td><small>${a.nt}</small></tr>`).join(""));
+const M=`<div class="mast"><p><b><i>Nick (Dagger).</i></b> When you make the extra attack of the Light property, you can make it as part of the Attack action instead of as a Bonus Action. This extra attack can only be made once per turn.</p><p><b>Unarmed Strike.</b> You make a melee attack that involves using your body. <i>Damage.</i> 1 + STR modifier bludgeoning. <i>Grapple.</i> The target must succeed on a STR/DEX saving throw (DC 8 + Prof. Bonus + STR) or have the Grappled condition. <i>Shove.</i> The target must succeed on a STR/DEX saving throw or you push it 5 ft. away or give it the Prone condition.</p><p><b><i>Vex (Rapier).</i></b> If you hit a creature with a Rapier and deal damage to it, you have Advantage on your next attack roll against that creature before the end of your next turn.</p></div>`;
+const O=sec("OTHER")+atbl(`<tr data-act="open" data-id="o-sneak"><td>Sneak Attack<br><small>Range</small><td>--<td>--<td><span class="v">${sd}d6</span><td></tr>`)+chips("other")+`<p><b>Sneak Attack</b> (Special)<br>Once per turn you can deal an extra <b>${sd}d6</b> damage to one creature you hit with an attack if you have Advantage on the roll and the attack uses a Finesse or Ranged weapon.</p>`;
+if(f=="all")h+=T+chips("action")+M+sec("BONUS ACTIONS")+chips("bonus")+sec("REACTIONS")+chips("reaction")+O;
+else{if(f=="attack")h+=T+M;if(f=="action")h+=chips("action");if(f=="bonus")h+=sec("BONUS ACTIONS")+chips("bonus");if(f=="reaction")h+=sec("REACTIONS")+chips("reaction");if(f=="other")h+=O}
+return h+`<div style="margin-top:10px"><b>Luck Points</b> ${[0,1].map(i=>`<button class="chk ${S.luck>i?"on":""}" data-act="luck" data-id="${i}" aria-label="Luck point"></button>`).join("")}<button class="btn" data-act="sneak" style="margin-left:12px">${S.sneak?"☑":"☐"} Sneak Attack active</button></div>`}
+function inv(){
+const F=S.sub.inv,q=(S.q||"").toLowerCase(),SC=[["eq","EQUIPMENT"],["pack","BACKPACK"],["quiver","QUIVER"],["attune","ATTUNEMENT"],["other","OTHER POSSESSIONS"]];
+let h=`<div class="invh"><div><b>WEIGHT CARRIED: ${gp(W())} lb.</b><br><small>${W()<=5*AB.STR?"UNENCUMBERED":W()<=10*AB.STR?"ENCUMBERED":"HEAVILY ENCUMBERED"}</small></div><span class="sp"></span><span>cp <input class="t" style="width:64px;display:inline;margin:0" type="number" value="${S.cp}" data-act="money" data-id="cp"> gp <input class="t" style="width:64px;display:inline;margin:0" type="number" value="${S.gp}" data-act="money" data-id="gp"></span></div>
+<input class="t" id="sq" placeholder="Search Item Names, Types, Rarities, or Tags" value="${esc(S.q||"")}">`+filt("inv",[["all","ALL"],...SC.map(([k,n])=>[k,n])]);
+SC.forEach(([k,n])=>{if(F!="all"&&F!=k)return;const L=S.items.filter(i=>i.sec==k&&(i.n+i.sub+i.nt).toLowerCase().includes(q));if(!L.length&&F=="all")return;
+h+=`<div class="sec"><b>${n}</b> (${L.length}) <span style="float:right">${gp(L.reduce((s,i)=>s+i.w*i.q,0))} lb.</span></div>`;
+h+=L.length?`<table class="at"><tr><th>ACTIVE<th>NAME<th>WEIGHT<th>QTY<th>COST (GP)<th>NOTES</tr>${L.map(i=>`<tr><td>${k=="eq"||k=="attune"?`<button class="chk ${i.on?"on":""}" data-act="eqp" data-id="${i.id}" aria-label="Active"></button>`:"–"}<td data-act="open" data-id="i-${i.id}" class="ch2"><b>${esc(i.n)}</b><br><small>${esc(i.sub)}</small><td>${i.w} lb.<td><span class="q"><button data-act="qty" data-id="${i.id}" data-v="-1" aria-label="Kurangi">−</button><span class="v">${i.q}</span><button data-act="qty" data-id="${i.id}" data-v="1" aria-label="Tambah">+</button></span><td>${gp(i.c)}<td><small>${esc(i.nt)}</small></tr>`).join("")}</table>`:`<div class="empty">Kosong.</div>`});
+return h+`<div class="sec">+ Add Equipment</div><div class="addrow"><input class="t" id="inn" placeholder="Nama"><input class="t" id="inw" type="number" placeholder="Berat (lb)"><input class="t" id="inq" type="number" placeholder="Qty" value="1"><input class="t" id="inc" type="number" placeholder="Harga (gp)"><select class="t" id="ins"><option value="eq">Equipment</option><option value="pack">Backpack</option><option value="quiver">Quiver</option><option value="attune">Attunement</option><option value="other">Other</option></select><button class="btn g" data-act="addinv">Add</button></div>`}
+function feat(){const f=S.sub.feat;let h=filt("feat",[["all","ALL"],["class","CLASS FEATURES"],["species","SPECIES TRAITS"],["feat","FEATS"]]);
+FT().filter(g=>f=="all"||g.c==f).forEach(g=>{h+=sec({class:"CLASS FEATURES",species:"SPECIES TRAITS",feat:"FEATS"}[g.c])+`<h4 class="gh">${g.g}</h4>`;
+g.i.forEach(x=>{h+=`<div class="ft"><b>${x.n}</b> • <i>${x.s}</i>${x.d?x.d.split("\n").map(p=>`<p>${esc(p)}</p>`).join(""):""}${x.ch.length?`<div class="chl">${x.ch.map(c=>`<div>${esc(c)}</div>`).join("")}</div>`:""}</div>`})});return h}
+const ed=(k,ph,v)=>`<div class="ed" contenteditable data-act="fld" data-k="${k}" data-ph="${ph}">${esc(v||"")}</div>`;
+function bg(){const f=S.sub.bg,F=S.f,sh=k=>f=="all"||f==k;let h=filt("bg",[["all","ALL"],["bg","BACKGROUND"],["ch","CHARACTERISTICS"],["ap","APPEARANCE"]]);
+if(sh("bg"))h+=sec("BACKGROUND")+`<h4 class="gh">Criminal</h4><div class="ft"><b>Criminal</b> • <i>Origin feat: Alert</i><div class="chl"><div>Skills: Sleight of Hand, Stealth</div><div>Tool: Thieves' Tools</div></div></div>`;
+if(sh("ch")){h+=sec("CHARACTERISTICS")+`<div class="grid">${[["align","ALIGNMENT"],["gender","GENDER"],["eyes","EYES"],["size","SIZE"],["height","HEIGHT"],["faith","FAITH"],["hair","HAIR"],["skin","SKIN"],["age","AGE"],["weight","WEIGHT"]].map(([k,n])=>`<div><b>${n}</b>${ed(k,"–",F[k])}</div>`).join("")}</div><hr>`;
+h+=[["pt","Personality Traits"],["ideals","Ideals"],["bonds","Bonds"],["flaws","Flaws"]].map(([k,n])=>`<div class="ft"><b>${n}</b>${ed(k,"+ Add "+n,F[k])}</div>`).join("")}
+if(sh("ap"))h+=sec("APPEARANCE")+ed("app","+ Add Appearance information",F.app);return h}
+function notes(){const f=S.sub.notes;let h=filt("notes",[["all","ALL"],["org","ORGS"],["ally","ALLIES"],["enemy","ENEMIES"],["back","BACKSTORY"],["other","OTHER"]]);
+[["org","Organizations"],["ally","Allies"],["enemy","Enemies"],["back","Backstory"],["other","Other"]].forEach(([k,n])=>{if(f!="all"&&f!=k)return;
+h+=sec(n.toUpperCase())+S.nt[k].map((t,i)=>`<div class="ent2"><div class="ed" contenteditable data-act="nt" data-k="${k}" data-i="${i}" data-ph="Tulis catatan...">${esc(t)}</div><button class="x" data-act="delnt" data-k="${k}" data-i="${i}" aria-label="Hapus">✕</button></div>`).join("")+`<button class="add" data-act="addn" data-k="${k}">+ Add ${n}</button>`});return h}
+function extra(){const L=S.ent.extra;return L.map((e,i)=>`<div class="ent"><h4><span contenteditable data-act="et" data-i="${i}">${esc(e.t)}</span><button class="x" data-act="del" data-i="${i}" aria-label="Hapus">✕</button></h4><div class="tx" contenteditable data-act="ex" data-i="${i}">${esc(e.x)}</div></div>`).join("")+`<input class="t" id="et" placeholder="Judul"><textarea class="t" id="ex" rows="3" placeholder="Isi"></textarea><button class="btn g" data-act="addent">Tambah</button>`}
+function tabs(){const T=[["actions","ACTIONS",actions],["inv","INVENTORY",inv],["feat","FEATURES & TRAITS",feat],["bg","BACKGROUND",bg],["notes","NOTES",notes],["extra","EXTRAS",extra]];
+return `<div class="tabs">${T.map(([k,n])=>`<button class="${S.tab==k?"on":""}" data-act="tab" data-id="${k}">${n}</button>`).join("")}</div>`+T.find(t=>t[0]==S.tab)[2]()}
+function view(){
+PB=Math.ceil(S.lvl/4)+1;const hpP=Math.max(0,Math.min(100,S.hp/S.max*100)),nx=S.lvl<20?XPT[S.lvl]:null,xpP=nx?Math.min(100,(S.xp-XPT[S.lvl-1])/(nx-XPT[S.lvl-1])*100):100;
+let h=`<header><div><h1>Azio dottore</h1><small>Human Rogue ${S.lvl} · Criminal</small></div>
+<div class="xp"><small>LVL ${S.lvl}${nx?" · LVL "+(S.lvl+1):" · MAX"}</small><div class="bar"><i style="width:${xpP}%;background:var(--a)"></i></div><small>${S.xp} / ${nx||"MAX"} XP</small></div>
+<span class="xc"><input id="xpa" type="number" min="1" value="100" aria-label="Jumlah XP"><button class="btn g" data-act="addxp">+ XP</button><button class="btn g" data-act="lvup">Level Up</button><button class="btn" data-act="lvdn" aria-label="Turunkan level">−</button></span><span class="sp"></span>
+<button class="btn" data-act="short">Short Rest</button><button class="btn" data-act="long">Long Rest</button><button class="btn r" data-act="reset">Reset</button></header>
+<div class="top">${Object.keys(AB).map(k=>`<div class="box ab"><b>${k}</b><div class="m">${sg(mod(AB[k]))}</div><span class="s">${AB[k]}</span></div>`).join("")}
+<div class="box stat"><b>Proficiency</b><span>${sg(PB)}</span></div><div class="box stat"><b>Speed</b><span>30 ft</span></div>
+<div class="box stat"><b>Initiative</b><span>${sg(mod(AB.DEX)+PB)}</span></div><div class="box stat"><b>Armor Class</b><span>15</span></div><div class="box stat"><b>Hit Dice</b><span>${S.lvl}d8</span></div>
+<div class="box stat"><b>Heroic Inspiration</b><button class="chk ${S.insp?"on":""}" data-act="insp" aria-label="Heroic Inspiration"></button></div>
+<div class="box hp"><div class="hpn"><div>Current<span>${S.hp}</span></div><div>Max<span>${S.max}</span></div><div>Temp<span>${S.tmp||"--"}</span></div></div><div class="bar"><i style="width:${hpP}%"></i></div>
+<div class="hpc"><button class="btn g" data-act="heal">Heal</button><input id="amt" type="number" min="1" value="1" aria-label="Jumlah"><button class="btn r" data-act="dmg">Damage</button><button class="btn" data-act="temp">+Temp</button><button class="btn" data-act="setmax">Max</button></div></div></div>
+<div class="cols"><div><div class="box"><h3>Saving Throws</h3>${Object.keys(AB).map(a=>`<div class="row" data-act="open" data-id="sv-${a}"><span class="dot ${PROF_SAVE.includes(a)?"l1":""}"></span><span class="n">${a}</span><span class="v">${sg(save_(a))}</span></div>`).join("")}</div>
+<div class="box" style="margin-top:12px"><h3>Senses</h3>${["Perception","Insight","Investigation"].map(n=>`<div class="row"><span class="v">${pas(n)}</span><span class="n">Passive ${n}</span></div>`).join("")}</div>
+<div class="box" style="margin-top:12px"><h3>Proficiencies</h3><div class="row" data-act="open" data-id="prof"><span class="n">Armor, Weapons, Tools, Languages <small>klik untuk detail</small></span></div></div></div>
+<div class="box"><h3>Skills (klik lingkaran: kosong → proficient → expertise)</h3>${SK.map(s=>`<div class="row" data-act="open" data-id="sk-${s[0]}"><button class="dot l${S.lv[s[0]]||0}" data-act="lv" data-id="${s[0]}" aria-label="Proficiency ${s[0]}"></button><small>${s[1]}</small><span class="n">${s[0]}</span><span class="v">${sg(sk(s))}</span></div>`).join("")}</div>
+<div class="box c3">${tabs()}</div></div>`;
+$("#main").innerHTML=h;$("#side").innerHTML=sel?`<button class="btn" data-act="close" style="float:right">Tutup</button>${sel.html}`:`<div class="empty2">Klik item, skill, atau serangan untuk melihat penjelasan.</div>`}
+function setSel(id){let o=null;const hit=sg(4+PB);
+const a=ATK.find(x=>"a-"+x.n==id);if(a)o=`<h2>${a.n}</h2><em>${a.t}</em><hr><div class="kv"><b>Range</b>${a.r} ft.</div><div class="kv"><b>Hit</b>${hit}</div><div class="kv"><b>Damage</b>${a.d}</div><div class="kv"><b>Notes</b>${a.nt||"-"}</div><hr><p>${a.desc}</p>`;
+const c=ACT.find(x=>"c-"+x.n==id);if(c)o=`<h2>${c.n}</h2><em>${{action:"Action",bonus:"Bonus Action",reaction:"Reaction",other:"Other"}[c.tag]} in Combat</em><hr><p>${c.desc}</p>`;
+if(id=="o-sneak")o=`<h2>Sneak Attack</h2><em>Rogue · Special</em><hr><div class="kv"><b>Damage</b>${Math.ceil(S.lvl/2)}d6</div><p>Once per turn, extra damage to a creature you hit if you have Advantage and use a Finesse or Ranged weapon, or if an ally is within 5 ft. of the target (not Incapacitated) and you don't have Disadvantage.</p>`;
+if(id.startsWith("sk-")){const s=SK.find(x=>x[0]==id.slice(3)),l=S.lv[s[0]]||0;o=`<h2>${s[0]}</h2><em>${s[1]} · ${["Not proficient","Proficient","Expertise"][l]}</em><hr><div class="kv"><b>Bonus</b>${sg(sk(s))}</div><p>${s[1]} modifier (${sg(mod(AB[s[1]]))}) + Proficiency (${sg(PB)}) × ${l}. Click the circle beside the skill to change its status.</p>`}
+if(id.startsWith("sv-")){const x=id.slice(3);o=`<h2>${x} Saving Throw</h2><em>${PROF_SAVE.includes(x)?"Proficient":"Not proficient"}</em><hr><div class="kv"><b>Bonus</b>${sg(save_(x))}</div>`}
+if(id=="prof")o=`<h2>Proficiencies</h2><hr><div class="kv"><b>Armor</b>Light</div><div class="kv"><b>Weapons</b>Hand crossbow, Rapier, Scimitar, Shortsword, Simple, Whip</div><div class="kv"><b>Tools</b>Thieves' Tools</div><div class="kv"><b>Languages</b>Common, Deep Speech, Draconic, Elvish, Thieves' Cant</div>`;
+if(id.startsWith("i-")){const i=S.items.find(x=>"i-"+x.id==id);if(i)o=`<h2>${esc(i.n)}</h2><em>${esc(i.sub)}</em><hr><div class="kv"><b>Weight</b>${i.w} lb.</div><div class="kv"><b>Qty</b>${i.q}</div><div class="kv"><b>Cost</b>${gp(i.c)} gp</div><div class="kv"><b>Notes</b>${esc(i.nt)||"-"}</div><hr><button class="btn r" data-act="delinv" data-id="${i.id}">Hapus item</button>`}
+sel=o?{id,html:o}:null}
+const amt=()=>Math.max(0,parseInt($("#amt").value)||0),V=s=>$(s).value.trim();
+document.addEventListener("click",e=>{
+const el=e.target.closest("[data-act]");if(!el||el.matches("[contenteditable],input,select"))return;
+const a=el.dataset.act,id=el.dataset.id,k=el.dataset.k;let re=true;
+if(a=="open")setSel(id);else if(a=="close")sel=null;
+else if(a=="lv"){e.stopPropagation();S.lv[id]=((S.lv[id]||0)+1)%3;if(sel&&sel.id=="sk-"+id)setSel(sel.id)}
+else if(a=="tab")S.tab=id;else if(a=="fl")S.sub[k]=id;
+else if(a=="heal")S.hp=Math.min(S.max,S.hp+amt());
+else if(a=="dmg"){let n=amt(),t=Math.min(S.tmp,n);S.tmp-=t;n-=t;S.hp=Math.max(0,S.hp-n)}
+else if(a=="temp")S.tmp=Math.max(S.tmp,amt());
+else if(a=="setmax"){const n=amt();if(n>0){S.max=n;S.hp=Math.min(S.hp,n)}}
+else if(a=="addxp"){S.xp+=Math.max(0,parseInt($("#xpa").value)||0);while(S.lvl<20&&S.xp>=XPT[S.lvl])levelUp()}
+else if(a=="lvup")levelUp();
+else if(a=="lvdn"){if(S.lvl>1){const g=5+mod(AB.CON);S.lvl--;S.max=Math.max(1,S.max-g);S.hp=Math.min(S.hp,S.max);S.xp=XPT[S.lvl-1]}}
+else if(a=="insp")S.insp=!S.insp;else if(a=="luck")S.luck=S.luck>id?+id:+id+1;else if(a=="sneak")S.sneak=!S.sneak;
+else if(a=="long"){S.hp=S.max;S.tmp=0;S.luck=2;S.insp=true}
+else if(a=="reset"){if(confirm("Reset semua data ke awal?")){localStorage.removeItem(KEY);location.reload()}re=false}
+else if(a=="qty"){const i=S.items.find(x=>x.id==id);i.q=Math.max(0,i.q+ +el.dataset.v)}
+else if(a=="eqp"){const i=S.items.find(x=>x.id==id);i.on=!i.on}
+else if(a=="delinv"){S.items=S.items.filter(x=>x.id!=id);sel=null}
+else if(a=="addinv"){const n=V("#inn");if(n)S.items.push({id:S.nid++,n,sub:"Gear",w:+V("#inw")||0,q:+V("#inq")||1,c:+V("#inc")||0,nt:"",sec:$("#ins").value,on:false})}
+else if(a=="addn"){S.nt[k].push("");save();view();const L=document.querySelectorAll(`[data-act=nt][data-k=${k}]`);L[L.length-1].focus();return}
+else if(a=="delnt")S.nt[k].splice(+el.dataset.i,1);
+else if(a=="addent"){const t=V("#et"),x=V("#ex");if(t||x)S.ent.extra.push({t:t||"Tanpa judul",x})}
+else if(a=="del")S.ent.extra.splice(+el.dataset.i,1);
+else re=false;
+save();if(re)view()});
+document.addEventListener("input",e=>{if(e.target.id=="sq"){S.q=e.target.value;save();view();const s=$("#sq");s.focus();s.setSelectionRange(s.value.length,s.value.length)}});
+document.addEventListener("focusout",e=>{const el=e.target,a=el.dataset.act,i=+el.dataset.i;
+if(a=="fld")S.f[el.dataset.k]=el.innerText.trim();
+if(a=="nt")S.nt[el.dataset.k][i]=el.innerText.trim();
+if(a=="et")S.ent.extra[i].t=el.textContent;if(a=="ex")S.ent.extra[i].x=el.innerText;
+if(a=="money")S[el.dataset.id]=parseInt(el.value)||0;save()});
+view();
+</script></body></html>
